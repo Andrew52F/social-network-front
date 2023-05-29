@@ -1,23 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../models/IUser';
-import { loginAction, registrationAction, logoutAction, checkAuth } from './asyncActionCreators';
+import { AuthUser } from '../models/AuthUser';
+import { loginAction, registrationAction, logoutAction, checkAuth, RequestError } from './asyncActionCreators';
 
-interface UserState {
-  authUser: null | IUser;
+interface AuthState {
+  authUser: null | AuthUser;
+  isUserCreated?: boolean;
+  isLoading: boolean;
   isAuth: boolean;
-  status: null | string;
-  error: null | string | any;
+  error: any;
 }
 
-//example with action.payload typification
-// someReducer(state, action: PayloadAction<num>) {
-
-// }
-
-const initialState: UserState = {
+const initialState: AuthState = {
   authUser: null,
+  isLoading: true,
   isAuth: false,
-  status: null,
   error: null,
 }
 
@@ -25,73 +21,78 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    someReducer(state, {payload}) {
-
+    setIsUserCreated(state, {payload}:{type: string, payload: boolean}) {
+      
     }
   },
   extraReducers: (builder) => {
     builder
       //login actions
       .addCase(loginAction.pending, (state) => {
-        state.status = 'pending';
+        
       })
       .addCase(loginAction.fulfilled, (state, { payload }) => {
-        const { user } = payload;
-
-        state.status = 'idle';
-        state.authUser = user;
+        const { authUser } = payload;
+        
+        state.isLoading = false;
+        state.authUser = authUser;
         state.isAuth = true;
+        state.error = null;
       })
-      .addCase(loginAction.rejected, (state, { payload }) => {
-        state.status = 'failed';
-        console.log('rejected login payload: ', payload);
+      .addCase(loginAction.rejected, (state, { payload}) => {
+        state.isLoading = false;
+        // console.log('rejected login payload: ', payload);
         state.isAuth = false;
         state.error = payload;
       })
       //registration actions
       .addCase(registrationAction.pending, (state) => {
-        state.status = 'pending';
+        // state.status = 'pending';
       })
       .addCase(registrationAction.fulfilled, (state, { payload }) => {
-        const { user } = payload;
+        const { authUser } = payload;
 
-        state.status = 'idle';
-        state.authUser = user;
+        state.isLoading = false;
+        state.authUser = authUser;
         state.isAuth = true;
+        state.error = null;
       })
       .addCase(registrationAction.rejected, (state, { payload }) => {
-        state.status = 'failed';
-        console.log('rejected login payload: ', payload);
+        state.isLoading = false;
+        // console.log('rejected login payload: ', payload);
         state.isAuth = false;
         state.error = payload;
       })
       //logout actions
       .addCase(logoutAction.pending, (state) => {
-        state.status = 'pending';
+        // state.status = 'pending';
       })
       .addCase(logoutAction.fulfilled, (state) => {
-        state.status = null;
+        state.isLoading = false;
         state.isAuth = false;
+        state.error = null;
       })
       .addCase(logoutAction.rejected, (state, { payload }) => {
-        state.status = 'failed';
-        console.log('rejected login payload: ', payload);
+        state.isLoading = false;
+        // console.log('rejected login payload: ', payload);
         state.isAuth = false;
         state.error = payload;
       })
+      //checkAuth actions
       .addCase(checkAuth.pending, (state) => {
-        state.status = 'pending';
+        // state.status = 'pending';
       })
       .addCase(checkAuth.fulfilled, (state, { payload }) => {
-        const user = payload?.user;
+        const authUser = payload?.authUser;
 
-        state.status = 'idle';
-        state.authUser = user || null;
+        state.isLoading = false;
+        state.authUser = authUser || null;
         state.isAuth = true;
+        state.error = null;
       })
       .addCase(checkAuth.rejected, (state, { payload }) => {
-        state.status = 'failed';
-        console.log('rejected login payload: ', payload);
+        state.isLoading = false;
+        // console.log('rejected login payload: ', payload);
         state.isAuth = false;
         state.error = payload;
       })

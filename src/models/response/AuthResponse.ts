@@ -1,7 +1,11 @@
-import { IUser } from './../IUser';
+import { AuthUser } from '../AuthUser';
+import { UserSmall } from '../UserSmall';
 
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
-  user: IUser;
+  authUser: AuthUser;
+  user?: UserSmall;
+  friends?: UserSmall[]
 }
+

@@ -1,13 +1,152 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --xs: 480px;
+  --sm: 768px;
+  --md: 1060px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.theme-light {
+  --background: #edeef0;
+  --foreground: #ffffff;
+  --background-input: #ffffff;
+  --edge: #dfdfdf;
+
+  --text: #000000;
+  --text-inverted: #ffffff;
+  --text-rgb: 0 0 0;
+  --text-inverted-rgb: 255 255 255;
+  --text-muted: #dfdfdf;
+  --accent: #4ba0b6;
+
 }
+
+
+
+
+.theme-dark {
+  --background: #141414;
+  --foreground: #222222;
+  --background-input: #292929;
+  --edge: #5c6464;
+
+  --text: #ffffff;
+  --text-inverted: #000000;
+  --text-rgb: 255 255 255;
+  --text-inverted-rgb: 0 0 0;
+  --text-muted: #5c6464;
+
+  --accent: #4ba0b6;
+
+
+  --dark-black: #141414;
+  --black: #222222;
+
+  --dark-blue: #16697b;
+  --blue: #4ba0b6;
+  --light-blue: #82c0cb;
+
+  --dark-gray: #44433b;
+  --gray: #5c6464;
+  --light-gray: #81857d;
+
+  --yellow: #ffa62b;
+
+  --dark-green: #105551;
+}
+
+html, body, #root, .app {
+  height: 100%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0px 9999px var(--background-input);
+}
+
+
+textarea, input { outline: none; }
+input:focus, textarea:focus {
+  outline: none;
+  border: specify yours;
+}
+
+.auth-nav-color.active {
+  @apply text-accent;
+}
+.auth-nav-color.active:hover {
+  @apply text-accent;
+}
+
+.icon-stroke-color > path {
+  stroke: var(--text-inverted)
+}
+
+
+.nav-opacity * {
+  @apply text-text-inverted-rgba/40;
+  @apply fill-text-inverted-rgba/40;
+   
+  @apply transition;
+  @apply  duration-200;
+}
+
+.nav-opacity .image {
+  @apply bg-text-inverted-rgba/40;
+
+}
+
+.nav-opacity:hover * {
+  @apply text-text-inverted-rgba/60;
+  @apply fill-text-inverted-rgba/60;
+}
+
+.nav-opacity:hover .image {
+  @apply bg-text-inverted-rgba/60;
+
+}
+
+.nav-opacity.active * {
+  @apply text-text-inverted-rgba/80;
+  @apply fill-text-inverted-rgba/80;
+}
+
+.nav-opacity.active .image {
+  @apply bg-text-inverted-rgba/80;
+
+}
+
+.interaction-btn:hover svg {
+  @apply fill-text
+}
+.interaction-btn:hover div {
+  @apply block
+}
+
+* {
+  scrollbar-color: var(--edge) var(--foreground);
+}
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--edge);
+  border-radius: 8px;
+}
+
+
+body {
+  @apply bg-background;
+  @apply font-opensans;
+  @apply text-text;
+  
+}
+
+.w-wrap {
+  word-wrap: break-word;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

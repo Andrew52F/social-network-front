@@ -1,12 +1,14 @@
-import { IUser } from './../models/IUser';
-import { AuthResponse } from './../models/response/AuthResponse';
+import { AuthUser } from '../models/AuthUser';
+import { AuthResponse } from '../models/response/AuthResponse';
 import $api from "../http";
 import { AxiosResponse } from "axios";
 
-export default class AuthUserService {
-  static async fetchUsers(): Promise<AxiosResponse<IUser[]>> {
-    return $api.get<IUser[]>('/auth/users')
+class AuthUserService {
+  static async fetchUsers(): Promise<AxiosResponse<AuthUser[]>> {
+    return $api.get<AuthUser[]>('/auth/users')
 
   }
 
 }
+
+export default AuthUserService;

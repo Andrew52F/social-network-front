@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
-import { useAppDispatch } from '../hooks/redux';
-import { loginAction, registrationAction } from '../store/asyncActionCreators';
+import { useAppDispatch } from '../../hooks/redux';
+import { loginAction, registrationAction } from '../../store/asyncActionCreators';
 
 const LoginForm: FC = () => {
   const [email, setEmail] = useState<string>('')

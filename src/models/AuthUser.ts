@@ -1,4 +1,4 @@
-export interface IUser {
+export interface AuthUser {
   email: string;
   isActivated: boolean;
   id: string;
